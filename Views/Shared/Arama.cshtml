@@ -1,0 +1,11 @@
+﻿
+
+        @using (Html.BeginForm("Liste", "Yazi", FormMethod.Get))
+        {
+
+            <form class="form-inline my-2 my-lg-0">
+                @Html.TextBox("AnahtarKelime",null,new { @class="form-control"})
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
+            </form>
+        }
+

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BlogProje.Models.YaziModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Yazılar</h2>
+<hr />
+
+
+@Html.Partial("YaziListesi", Model)
+
+@section SagKisim{
+    @Html.Partial("Arama")
+    @{Html.RenderAction("KategoriListesi", "Kategori");}
+}

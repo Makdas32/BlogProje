@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BlogProje.Models.Yazi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Yazılar</h2>
+<hr />
+<p>
+    @Html.ActionLink("Yeni Yazı Ekle", "Ekle", null, new { @class = "btn btn-primary" })
+</p>
+<hr />
+@if (TempData["YaziGuncel"] != null)
+{
+    var yazi = (BlogProje.Models.Yazi)TempData["YaziGuncel"];
+    <div class="alert alert-success" role="alert">
+        <strong>@yazi.Baslik</strong> Güncellendi
+    </div>
+}
+<table class="table table-bordered table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Baslik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EklenmeTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anasayfa)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Baslik)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EklenmeTarihi)
+            </td>
+            <td>
+                @if (item.Onay)
+                {
+                    <span class="badge badge-success">Onaylı</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">Onay Bekliyor</span>
+                }
+            </td>
+            <td>
+                @if (item.Anasayfa)
+                {
+                    <span class="badge badge-success">Anasayfada</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">Anasayfada Değil</span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                @Html.ActionLink("Yazı Detayları", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
